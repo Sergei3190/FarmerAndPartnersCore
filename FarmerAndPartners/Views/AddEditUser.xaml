@@ -1,0 +1,45 @@
+﻿<Window x:Class="FarmerAndPartners.Views.AddEditUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FarmerAndPartners.Views"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="Пользователь" Height="220" Width="350">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding Closing}" PassEventArgsToCommand="True"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="33"/>
+            <RowDefinition Height="33"/>
+            <RowDefinition Height="33"/>
+            <RowDefinition Height="33"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Content="Имя пользователя:"/>
+        <TextBox x:Name="txtUser" Grid.Column="1" Grid.Row="0" 
+                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="5"/>
+        <Label Grid.Column="0" Grid.Row="1" Content="Логин:"/>
+        <TextBox x:Name="txtLogin" Grid.Column="1" Grid.Row="1"
+                 Text="{Binding Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="5"/>
+        <Label Grid.Column="0" Grid.Row="2" Content="Пароль:"/>
+        <TextBox x:Name="txtPassword" Grid.Column="1" Grid.Row="2"
+                 Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="5"/>
+        <Label Grid.Column="0" Grid.Row="3" Content="Наименование компании:"/>
+        <ComboBox x:Name="cbxCompany" Grid.Column="1" Grid.Row="3" DisplayMemberPath="Name"
+                  ItemsSource="{Binding CompanyViewModels}" SelectedItem="{Binding SelectedCompanyViewModel}"
+                  IsEditable="True" Margin="5" MaxDropDownHeight="65" Style="{StaticResource optimizationComboBox}"/>
+        <Button x:Name="btnSaveUser" Grid.Column="0" Grid.Row="4" Content="Сохранить" HorizontalAlignment="Right"
+                Command="{Binding Save}"/>
+        <Button x:Name="btnCancelUser" Grid.Column="1" Grid.Row="4" Content="Отменить" HorizontalAlignment="Center"
+                Command="{Binding Cancel}"/>
+    </Grid>
+</Window>
